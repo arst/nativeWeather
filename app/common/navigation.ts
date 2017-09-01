@@ -11,5 +11,5 @@ export function goToForecastPage() {
 
 export function goToMainPage() {
     //this shall be refasctored to look like forecast so code lloks mnore consistent
-    frame.topmost().naviagete('pages/forecast/forecast');
+    frame.topmost().naviagete('pages/main/main');
 }
