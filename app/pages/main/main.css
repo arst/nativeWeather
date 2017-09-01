@@ -1,0 +1,46 @@
+/*TODO:First, download the icon font that you want to use. For this app, the Weather Icons Font is used. Extract the zip archive and inside the extracted folder go to the font directory. Copy the .ttf file to the fonts directory in your app and rename it to weathericons.ttf. The filename is what you use as the value for the font-family every time you want to use that specific font icon. Aside from that, you also have to add the font-size to control the size of the icons.*/ 
+.temperature {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.weather {
+    font-size: 30px;
+    text-align: center;
+}
+
+.place {
+    font-size: 20px;
+    text-align: center;
+}
+
+.icon {
+    font-family: 'weathericons';
+    font-size: 100px;
+    text-align: center;
+}
+
+.small-icon {
+    font-family: 'weathericons';
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.details {
+    margin-top: 20px;
+    padding: 30px;
+    font-size: 18px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.details Label {
+    padding: 5px 0;
+}
+
+Button {
+    margin: 20px;
+}
