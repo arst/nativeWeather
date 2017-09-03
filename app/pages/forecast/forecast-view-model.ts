@@ -11,6 +11,14 @@ export class ForecastViewModel extends observable.Observable {
 
   constructor() {
     super();
+    this.refreshForecastData();
+  }
+
+  refresh(){
+    this.refreshForecastData();
+  }
+
+  private refreshForecastData() {
     let location = locationStore.getLocation();
     let locationPromise;
     if (location) {

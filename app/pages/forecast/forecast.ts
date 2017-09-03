@@ -11,3 +11,8 @@ export function navigatingTo(args: EventData) {
 export function goToMainPage() {
   navigation.goToMainPage();
 }
+
+export function onRefresh(args: EventData) {
+  var page = <Page>args.object;
+  page.bindingContext.refresh();
+}

@@ -2,6 +2,7 @@
   <Page.actionBar>
     <ActionBar title="5-day Forecast" class="header">
       <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="goToMainPage" />
+      <ActionItem tap="onRefresh" ios.systemIcon="13" ios.position="right" text="Refresh" android.position="actionBar"/>
     </ActionBar>
   </Page.actionBar>
   <StackLayout>
