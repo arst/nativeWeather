@@ -11,3 +11,8 @@ export function navigatingTo(args: EventData) {
 export function goToForecastPage() {
     navigation.goToForecastPage();
 }
+
+export function onRefresh(args: EventData) {
+    var page = <Page>args.object;
+    page.bindingContext.refresh();
+}

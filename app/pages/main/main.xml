@@ -1,4 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="{{ background_class }}">
+    <Page.actionBar>
+      <ActionBar title="Open Weather">
+         <ActionItem tap="onRefresh" ios.systemIcon="13" ios.position="right" text="Refresh" android.position="actionBar"/>
+      </ActionBar>
+    </Page.actionBar>
     <StackLayout>
         <ScrollView>
             <ActivityIndicator busy="{{ is_loading }}" visibility="{{ is_loading ? 'visible' : 'collapsed' }}" />
