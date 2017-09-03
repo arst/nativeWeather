@@ -27,8 +27,7 @@ export class ForecastViewModel extends observable.Observable {
  
   private getForecast(response) {
     var forecast = [];
-    var list = response.list.splice(1); //remove first item from array of forecasts
-    //format and push all the necessary data into a new array
+    var list = response.list.splice(1);
     list.forEach((item) => {
       forecast.push({
         day: moment.unix(item.dt).format('MMM DD (ddd)'),
