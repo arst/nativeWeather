@@ -81,11 +81,11 @@ export function getTimeOfDay() {
 }
 
 export function getIcons(icon_names) {
-    var icons = icon_names.map((name) => {
+    var result = icon_names.map((name) => {
         return {
             'name': name,
             'icon': String.fromCharCode(icons.WEATHER_ICONS.neutral[name])
         };
     });
-    return icons;
+    return result;
 }
