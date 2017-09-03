@@ -12,19 +12,32 @@ export class MainViewModel extends observable.Observable {
         super();
         if (!geolocation.isEnabled()) {
             //TODO: Is this location request has callback? If so: allow user to disable geo and enter location by hand
-            geolocation.enableLocationRequest();
+            geolocation.enableLocationRequest()
+                .then(
+                this.setGeoData,
+                (e) => {alert(e.message);});
+        }else{
+            this.setGeoData();
         }
+
+    }
+
+    setGeoData(){
+        debugger;
         var time_of_day = utilities.getTimeOfDay();
         this.set('background_class', time_of_day);
         this.setIcons();
-        var location = geolocation.getCurrentLocation({ timeout: 10000 }).
-            then(
+        let watchId = geolocation.watchLocation(function(loc){
+        }, function(err){}, null);
+        var location = geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 20000, timeout: 20000})
+            .then(
             (loc) => {
                 if (loc) {
                     locationStore.saveLocation(loc);
                     this.set('is_loading', true); //show the loader animation
                     var url = `${constants.WEATHER_URL}${constants.CURRENT_WEATHER_PATH}?lat=${loc.latitude}&lon=${loc.longitude}&apikey=${constants.WEATHER_APIKEY}`;
-                    requestor.get(url).then((res : any) => {
+                    geolocation.clearWatch(watchId);
+                    requestor.get(url).then((res: any) => {
                         this.set('is_loading', false); //stop loader animation
                         var weather = res.weather[0].main.toLowerCase();
                         var weather_description = res.weather[0].description;
@@ -52,21 +65,19 @@ export class MainViewModel extends observable.Observable {
                 }
             },
             (e) => {
-                //TODO: Handle this in more gently way. Allow user to Select the location by hand and so on
-                //failed to get location
                 alert(e.message);
             }
             );
     }
 
     setIcons() {
-        var iconsNames= utilities.getIcons([
-          'temperature', 'wind', 'cloud',
-          'pressure', 'humidity', 'rain',
-          'sunrise', 'sunset'
+        var iconsNames = utilities.getIcons([
+            'temperature', 'wind', 'cloud',
+            'pressure', 'humidity', 'rain',
+            'sunrise', 'sunset'
         ]);
         iconsNames.forEach((item) => {
-          this.set(`${item.name}_icon`, item.icon);
+            this.set(`${item.name}_icon`, item.icon);
         });
-      }
+    }
 }
