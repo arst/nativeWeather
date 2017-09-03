@@ -23,7 +23,6 @@ export class MainViewModel extends observable.Observable {
     }
 
     setGeoData(){
-        debugger;
         var time_of_day = utilities.getTimeOfDay();
         this.set('background_class', time_of_day);
         this.setIcons();
