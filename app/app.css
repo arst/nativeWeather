@@ -1,9 +1,4 @@
-﻿/*TODO: Generate app icon using If you want to easily create icons for both Android and iOS, check out MakeAppIcon. Simply choose an image file to use as the icon, and it will automatically generate different sizes for both Android and iOS. You can then move those to the folders mentioned above. Just make sure you got the correct sizes, and the names are the same as the images they replace.You can change the default app icon by going to the App_Resources folder. There you can see an Android and iOS folder. For Android, you can replace the image file in each of the following folders to change the icon:
-
-drawable-hdpi
-drawable-ldpi
-drawable-mdpi*/
-.header {
+﻿.header {
     background-color: #333;
     color: #fff;
 }
