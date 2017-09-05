@@ -2,6 +2,10 @@
 import geo = require('./geography');
 import icons = require('./icons');
 
+export class UvLevelViewModel {
+    constructor(public uvleveltext: string, public uvlevelclass: string){}
+}
+
 export function degreeToDirection(num) {
     var val = Math.floor((num / 22.5) + .5);
     return geo.DIRECTIONS[(val % 16)];
@@ -88,4 +92,33 @@ export function getIcons(icon_names) {
         };
     });
     return result;
+}
+
+export function getUVLevelViewModel(uvindex: number) : UvLevelViewModel{
+    let result: UvLevelViewModel = null;
+    let uvleveltext : string = null;
+    let uvlevelclass: string = null;
+    
+    if(uvindex <= 2){
+        uvleveltext = 'low';
+        uvlevelclass = 'lowuv';
+    }
+    else if(uvindex > 2 && uvindex <= 5 ){
+        uvleveltext = 'moderate';
+        uvlevelclass = 'moderateuv';
+    }
+    else if(uvindex > 5 && uvindex <= 7){
+        uvleveltext = 'high';
+        uvlevelclass = 'highuv';
+    }
+    else if(uvindex > 7 && uvindex <= 10){
+        uvleveltext = 'very high';
+        uvlevelclass = 'veryhighuv';
+    }
+    else{
+        uvleveltext = 'extreme';
+        uvlevelclass = 'extremeuv';
+    }
+
+    return new UvLevelViewModel(uvleveltext, uvlevelclass);
 }
