@@ -22,11 +22,11 @@ export class UVindexViewModel extends observable.Observable {
   }
 
   refresh() {
-    this.refreshUVdata();
+    this.refreshUVdata(true);
   }
 
-  private refreshUVdata() {
-    let location = locationStore.getLocation().then(
+  private refreshUVdata(forceLocationRefresh: boolean = false) {
+    let location = locationStore.getLocation(forceLocationRefresh).then(
       (loc) => {
         var url = `${constants.WEATHER_URL}${constants.UVINDEX_PATH}?lat=${loc.latitude}&lon=${loc.longitude}&apikey=${constants.WEATHER_APIKEY}`;
         var time_of_day = utilities.getTimeOfDay();

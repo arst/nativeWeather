@@ -15,11 +15,11 @@ export class ForecastViewModel extends observable.Observable {
   }
 
   refresh() {
-    this.refreshForecastData();
+    this.refreshForecastData(true);
   }
 
-  private refreshForecastData() {
-    locationStore.getLocation().then((loc) => {
+  private refreshForecastData(forceLocationRefresh: boolean = false) {
+    locationStore.getLocation(forceLocationRefresh).then((loc) => {
       var url = `${constants.WEATHER_URL}${constants.WEATHER_FORECAST_PATH}?cnt=6&lat=${loc.latitude}&lon=${loc.longitude}&apikey=${constants.WEATHER_APIKEY}`;
       var time_of_day = utilities.getTimeOfDay();
       this.set('is_loading', true);
@@ -62,7 +62,7 @@ export class ForecastViewModel extends observable.Observable {
     var icons = utilities.getIcons(['temperature', 'wind', 'cloud', 'pressure']);
     icons.forEach((item) => {
       this.set(`${item.name}_icon`, item.icon);
-    });
+    }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  );
   }
 
 }

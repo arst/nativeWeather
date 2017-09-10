@@ -5,8 +5,8 @@ export class Location {
     constructor(public latitude: number, public longitude: number) { }
 };
 
-export function getLocation(): Promise<Location> {
-    if (location) {
+export function getLocation(forceRefresh: boolean = false): Promise<Location> {
+    if (location && !forceRefresh) {
         return Promise.resolve(location);
     } else {
         let locationPromise: Promise<Location> = new Promise<Location>(function (resolve, reject) {

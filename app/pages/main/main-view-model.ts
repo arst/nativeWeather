@@ -13,7 +13,9 @@ export class MainViewModel extends observable.Observable {
         if (!geolocation.isEnabled()) {
             geolocation.enableLocationRequest()
                 .then(
-                this.setGeoData,
+                function () {
+                    this.setGeoData();
+                },
                 (e) => {
                     alert(e.message);
                 });
@@ -24,14 +26,14 @@ export class MainViewModel extends observable.Observable {
     }
 
     refresh() {
-        this.setGeoData();
+        this.setGeoData(true);
     }
 
-    setGeoData() {
+    setGeoData(forceLocationRefresh: boolean = false) {
         var time_of_day = utilities.getTimeOfDay();
         this.set('background_class', time_of_day);
         this.setIcons();
-        locationStore.getLocation().then((loc) => {
+        locationStore.getLocation(forceLocationRefresh).then((loc) => {
             if (loc) {
                 this.set('is_loading', true);
                 var url = `${constants.WEATHER_URL}${constants.CURRENT_WEATHER_PATH}?lat=${loc.latitude}&lon=${loc.longitude}&apikey=${constants.WEATHER_APIKEY}`;
