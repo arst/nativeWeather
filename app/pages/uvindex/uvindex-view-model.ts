@@ -7,6 +7,13 @@ import moment = require('moment');
 import utilities = require('../../common/utilities');
 import locationStore = require('../../stores/location');
 
+interface UvModelViewData {
+  uvLevelText: string;
+  uvLevelFromColor: string,
+  uvLevelToColor: string,
+  uvLevelIcon: string
+}
+
 export class UVindexViewModel extends observable.Observable {
 
   constructor() {
@@ -28,15 +35,62 @@ export class UVindexViewModel extends observable.Observable {
         requestor.get(url).then((response : any) => {
           this.set('is_loading', false);
           let uvindex = Number.parseFloat(response.value);
-          let uvlevel : utilities.UvLevelViewModel = utilities.getUVLevelViewModel(uvindex);
-          this.set('uvindex', uvindex);
-          this.set('uvlevel', uvlevel.uvleveltext);
-          this.set('uvlevelclass', uvlevel.uvlevelclass);
+          let data : UvModelViewData = this.getViewData(uvindex);
+          let icon = icons.WEATHER_ICONS['sun'][data.uvLevelIcon];
+          this.set('uvIndex', uvindex);
+          this.set('uvLevelIcon', String.fromCharCode(icon));
+          this.set('uvLevelText', data.uvLevelText);
+          this.set('uvLevelColor', data.uvLevelFromColor + ',' + data.uvLevelToColor);
         });
       },
       (e) => {
         alert(e.message);
       }
     );
+  }
+
+  private getViewData(uvindex: number) : UvModelViewData {
+    let uvleveltext : string = null;
+    let uvcolorfrom : string = null;
+    let uvcolorto: string = null;
+    let uvlevelIcon: string = null;
+    
+    if(uvindex <= 2){
+        uvleveltext = 'low';
+        uvcolorfrom ="#008000";
+        uvcolorto = "#FFFF00";
+        uvlevelIcon = 'low';
+    }
+    else if(uvindex > 2 && uvindex <= 5 ){
+      uvleveltext = 'moderate';
+      uvcolorfrom ="#FFD801";
+      uvcolorto = "#FFFF00";
+      uvlevelIcon = 'moderate';
+    }
+    else if(uvindex > 5 && uvindex <= 7){
+      uvleveltext = 'high';
+      uvcolorfrom ="#FF6301";
+      uvcolorto = "#FFFF00";
+      uvlevelIcon = 'high';
+    }
+    else if(uvindex > 7 && uvindex <= 10){
+      uvleveltext = 'very high';
+      uvcolorfrom ="#FF0101";
+      uvcolorto = "#FFFF00";
+      uvlevelIcon = 'full';
+    }
+    else{
+      uvleveltext = 'extreme';
+      uvcolorfrom ="#8a01ff";
+      uvcolorto = "#FFFF00";
+      uvlevelIcon = 'full';
+    }
+
+    return {
+      uvLevelText: uvleveltext,
+      uvLevelFromColor: uvcolorfrom,
+      uvLevelToColor: uvcolorto,
+      uvLevelIcon: uvlevelIcon
+    };
   }
 }

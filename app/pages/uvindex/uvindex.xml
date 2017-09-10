@@ -1,12 +1,15 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="{{ uvlevelclass }}">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:Gradient="nativescript-gradient" navigatingTo="navigatingTo">
   <Page.actionBar>
     <ActionBar title="UV index" class="header">
       <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="goToMainPage" />
       <ActionItem tap="onRefresh" ios.systemIcon="13" ios.position="right" text="Refresh" android.position="actionBar"/>
     </ActionBar>
   </Page.actionBar> 
-  <DockLayout width="100%" height="100%" class= "{{ uvlevelclass }}">
-    <Label text="{{ uvlevel }}"></Label>
-    <Label text="{{ uvindex }}"></Label>
-  </DockLayout>
+  <GridLayout rows="*" columns="*" style.backgroundColor="gray" >
+    <Gradient:Gradient style.verticalAlignment="center" style.textAlignment="center" height="100%" row="0" direction="to bottom" colors="{{ uvLevelColor }}">
+      <Label class="sunstate" text="{{ uvLevelIcon }}" style.verticalAlignment="center" style.textAlignment="center" textWrap="true"></Label>
+      <Label class="uvindex" text="{{ uvLevelText }}" style.verticalAlignment="center" style.textAlignment="center" textWrap="true"></Label>
+      <Label class ="uvindex" text="{{ uvIndex }}" horizontalAlignment="center" verticalAlignment="middle"></Label>
+    </Gradient:Gradient>
+  </GridLayout>
 </Page>

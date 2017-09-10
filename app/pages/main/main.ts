@@ -12,6 +12,10 @@ export function goToForecastPage() {
     navigation.goToForecastPage();
 }
 
+export function goToUVPage() {
+    navigation.goToUVPage();
+}
+
 export function onRefresh(args: EventData) {
     var page = <Page>args.object;
     page.bindingContext.refresh();
