@@ -26,5 +26,11 @@ export const WEATHER_ICONS = {
     'rain': 0xf019,
     'sunrise': 0xf046,
     'sunset': 0xf052
+  },
+  sun :{
+    'low': 0xf047,
+    'moderate': 0xf046,
+    'high': 0xf051,
+    'full': 0xf052
   }
 };
