@@ -36,7 +36,6 @@ export class MainViewModel extends observable.Observable {
                 this.set('is_loading', true);
                 var url = `${constants.WEATHER_URL}${constants.CURRENT_WEATHER_PATH}?lat=${loc.latitude}&lon=${loc.longitude}&apikey=${constants.WEATHER_APIKEY}`;
                 requestor.get(url).then((res: any) => {
-                    this.set('is_loading', false);
                     var weather = res.weather[0].main.toLowerCase();
                     var weather_description = res.weather[0].description;
                     var temperature = res.main.temp;
@@ -56,10 +55,12 @@ export class MainViewModel extends observable.Observable {
                     this.set('rain', `${rain}%`);
                     this.set('sunrise', moment.unix(res.sys.sunrise).format('hh:mm a'));
                     this.set('sunset', moment.unix(res.sys.sunset).format('hh:mm a'));
+                    this.set('is_loading', false);
                 });
             }
         },
             (e) => {
+                this.set('is_loading', false);
                 alert(e.message);
             });
     }
