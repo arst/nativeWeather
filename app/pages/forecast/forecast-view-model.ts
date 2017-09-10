@@ -26,10 +26,14 @@ export class ForecastViewModel extends observable.Observable {
       this.set('background_class', time_of_day);
       this.setIcons();
 
-      requestor.get(url).then((response) => {
-        this.set('is_loading', false);
-        var forecast = this.getForecast(response);
-        this.set('forecast', forecast);
+      requestor.Get(url).then((response: requestor.ResponseSource) => {
+        if(response.success) {
+          this.set('is_loading', false);
+          var forecast = this.getForecast(response.response);
+          this.set('forecast', forecast);
+        } else {
+          alert(response.errorMessage);
+        }
       });
     },
       (e) => {
@@ -48,9 +52,9 @@ export class ForecastViewModel extends observable.Observable {
           day: `${utilities.describeTemperature(item.main.temp)}`,
           night: `${utilities.describeTemperature(item.main.temp)}`
         },
-        wind: `${item.speed}m/s`,
-        clouds: `${item.clouds}%`,
-        pressure: `${item.pressure} hpa`,
+        wind: `${item.wind.speed}m/s`,
+        clouds: `${item.clouds.all}%`,
+        pressure: `${item.main.pressure} hpa`,
         description: item.weather[0].description
       })
     });
