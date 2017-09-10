@@ -32,15 +32,19 @@ export class UVindexViewModel extends observable.Observable {
         var time_of_day = utilities.getTimeOfDay();
         this.set('is_loading', true);
         this.set('background_class', time_of_day);
-        requestor.get(url).then((response : any) => {
-          this.set('is_loading', false);
-          let uvindex = Number.parseFloat(response.value);
-          let data : UvModelViewData = this.getViewData(uvindex);
-          let icon = icons.WEATHER_ICONS['sun'][data.uvLevelIcon];
-          this.set('uvIndex', uvindex);
-          this.set('uvLevelIcon', String.fromCharCode(icon));
-          this.set('uvLevelText', data.uvLevelText);
-          this.set('uvLevelColor', data.uvLevelFromColor + ',' + data.uvLevelToColor);
+        requestor.Get(url).then((response : requestor.ResponseSource) => {
+          if(response.success) {
+            this.set('is_loading', false);
+            let uvindex = Number.parseFloat(response.response.value);
+            let data : UvModelViewData = this.getViewData(uvindex);
+            let icon = icons.WEATHER_ICONS['sun'][data.uvLevelIcon];
+            this.set('uvIndex', uvindex);
+            this.set('uvLevelIcon', String.fromCharCode(icon));
+            this.set('uvLevelText', data.uvLevelText);
+            this.set('uvLevelColor', data.uvLevelFromColor + ',' + data.uvLevelToColor);
+          } else {
+            alert(response.errorMessage);
+          }
         });
       },
       (e) => {
