@@ -1,7 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="{{ background_class }}">
     <Page.actionBar>
       <ActionBar title="Open Weather">
-         <ActionItem tap="onRefresh" ios.systemIcon="13" ios.position="right" text="Refresh" android.position="actionBar"/>
+         <ActionItem tap="onRefresh" ios.systemIcon="13" ios.position="right" android.position="actionBar" android.systemIcon="res://ic_autorenew_black_24dp"/>
       </ActionBar>
     </Page.actionBar>
     <StackLayout>
@@ -56,6 +56,7 @@
                     <Label text="{{ sunset }}" textWrap="true" row="6" col="1" />
                 </GridLayout>
                 <Button text="5 day Forecast" tap="goToForecastPage" />
+                <Button text="UV Index" tap="goToUVPage" />
             </StackLayout>
         </ScrollView>
     </StackLayout>
