@@ -15,11 +15,11 @@ Application for weather forecasting created using NativeScript by Telerik.
 1.  :sweat_drops: Current weather
 2.  :rainbow: 5-days weather forecasting
 3.  :sunny: UV-index
+4.  :earth_asia: Air pollution
 
 # Roadmap
 
-1.  :earth_asia: Air pollution
-2.  :deciduous_tree: Weather map layers
+1.  :deciduous_tree: Weather Alerts
 
 
 
