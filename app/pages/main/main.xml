@@ -57,6 +57,7 @@
                 </GridLayout>
                 <Button text="5 day Forecast" tap="goToForecastPage" />
                 <Button text="UV Index" tap="goToUVPage" />
+                <Button text="Air Pollution" tap="goToAirPollutionPage" />
             </StackLayout>
         </ScrollView>
     </StackLayout>

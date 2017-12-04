@@ -16,6 +16,10 @@ export function goToUVPage() {
     navigation.goToUVPage();
 }
 
+export function goToAirPollutionPage() {
+    navigation.goToAirPollutionPage();
+}
+
 export function onRefresh(args: EventData) {
     var page = <Page>args.object;
     page.bindingContext.refresh();

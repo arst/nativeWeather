@@ -1,0 +1,14 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:Gradient="nativescript-gradient" navigatingTo="navigatingTo" class="{{ background_class }}">
+     <Page.actionBar>
+        <ActionBar title="Air Pollution" class="header">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="goToMainPage" />
+        <ActionItem tap="onRefresh" ios.systemIcon="13" ios.position="right" text="Refresh" android.position="actionBar"/>
+        </ActionBar>
+    </Page.actionBar>
+    <GridLayout rows="*" columns="*" style.backgroundColor="gray" >
+        <Gradient:Gradient style.verticalAlignment="center" style.textAlignment="center" height="100%" row="0" direction="to bottom">
+        
+        <Label class ="pollutionLevel" text="{{ pollutionLevel }}" horizontalAlignment="center" verticalAlignment="middle"></Label>
+        </Gradient:Gradient>
+    </GridLayout>
+</Page>
